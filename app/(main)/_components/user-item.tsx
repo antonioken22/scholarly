@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsLeftRight } from "lucide-react";
+import { ChevronsLeftRight, Home } from "lucide-react";
 
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -12,8 +12,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
 
 export const UserItem = () => {
+  const router = useRouter();
+
+  const onReturnHome = () => {
+    router.push(`/`);
+  };
+
   const { user } = useUser();
   return (
     <div>
@@ -40,10 +47,13 @@ export const UserItem = () => {
           alignOffset={11}
           forceMount
         >
-          <div className="flex flex-col space-y-4 p-2">
-            <p className="text-xs font-medium leading-non text-muted-foreground">
-              {user?.emailAddresses[0].emailAddress}
-            </p>
+          <div className="flex flex-col space-y-4 p-2 ">
+            <div className="flex justify-between">
+              <p className="text-xs font-medium leading-non text-muted-foreground">
+                {user?.emailAddresses[0].emailAddress}
+              </p>
+              <Home className="h-4 w-4" role="button" onClick={onReturnHome} />
+            </div>
             <div className="flex items-center gap-x-2">
               <div className="rounded-md bg-secondary p-1">
                 <Avatar className="h-8 w-8">
