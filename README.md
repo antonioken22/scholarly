@@ -7,9 +7,10 @@ https://scholarly-liart.vercel.app/
 ## Services Used
 - User Authentication: Clerk
 - Database Management: Convex
-- User Interface Components: Shadcn
-- Text Editor: Blocknote
 - Deployment: Vercel
+- User Interface Components: shadcn-ui
+- Text Editor: Blocknote
+- Emoji Picker: emoji-picker-react
 
 ## References
 - [Code with Antonio](https://www.youtube.com/@codewithantonio): https://www.youtube.com/watch?v=0OaDyjB9Ib8
