@@ -7,6 +7,7 @@ https://scholarly-liart.vercel.app/
 ## Services Used
 - User Authentication: Clerk
 - Database Management: Convex
+- Image/Media Bucket: Edge Store
 - Deployment: Vercel
 - User Interface Components: shadcn-ui
 - Text Editor: Blocknote
