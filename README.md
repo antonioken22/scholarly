@@ -6,12 +6,12 @@ https://scholarly-liart.vercel.app/
 
 ## Services Used
 - User Authentication: [Clerk](https://clerk.com/)
-- Database Management: [Convex]()
+- Database Management: [Convex](https://dashboard.convex.dev/)
 - Image/Media Bucket: [Edge Store](https://dashboard.edgestore.dev/)
-- Deployment: [Vercel]()
-- User Interface Components: [shadcn-ui]()
-- Text Editor: [Blocknote]()
-- Emoji Picker: [emoji-picker-react]()
+- Deployment: [Vercel](https://vercel.com/)
+- User Interface Components: [shadcn-ui](https://ui.shadcn.com/)
+- Text Editor: [Block Note](https://www.blocknotejs.org/)
+- Emoji Picker: [emoji-picker-react](https://www.npmjs.com/package/emoji-picker-react)
 
 ## References
 - [Code with Antonio](https://www.youtube.com/@codewithantonio): https://www.youtube.com/watch?v=0OaDyjB9Ib8
