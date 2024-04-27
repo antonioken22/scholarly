@@ -48,7 +48,7 @@ export const Title = ({ initialData }: TitleProps) => {
   };
 
   return (
-    <div className="flex items-center gap-x-1">
+    <div className="flex items-center gap-x-1 max-w-[240px]">
       {!!initialData.icon && <p>{initialData.icon}</p>}
       {isEditing ? (
         <Input
@@ -65,7 +65,7 @@ export const Title = ({ initialData }: TitleProps) => {
           onClick={enableInput}
           variant="ghost"
           size="sm"
-          className="font-normal h-auto p-1"
+          className="truncate font-normal h-auto p-1"
         >
           <span className="truncate">{initialData?.title}</span>
         </Button>
