@@ -114,16 +114,14 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         )}
       </div>
       {isEditing && !preview ? (
-        <div>
-          <TextareaAutoSize
-            ref={inputRef}
-            onBlur={disableInput}
-            onKeyDown={onKeyDown}
-            value={value}
-            onChange={(e) => onInput(e.target.value)}
-            className="w-[320px] md:w-auto text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none"
-          />
-        </div>
+        <TextareaAutoSize
+          ref={inputRef}
+          onBlur={disableInput}
+          onKeyDown={onKeyDown}
+          value={value}
+          onChange={(e) => onInput(e.target.value)}
+          className="w-[320px] md:w-auto text-5xl bg-transparent font-bold break-words outline-none text-[#3F3F3F] dark:text-[#CFCFCF] resize-none"
+        />
       ) : (
         <div
           onClick={enableInput}
