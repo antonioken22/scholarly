@@ -16,5 +16,15 @@ https://scholarly-liart.vercel.app/
 - Text Editor: [Block Note](https://www.blocknotejs.org/)
 - Emoji Picker: [emoji-picker-react](https://www.npmjs.com/package/emoji-picker-react)
 
+## Running Locally
+Terminal 1:
+```shell
+npm run dev
+```
+Terminal 2:
+```shell
+npx convex dev
+```
+
 ## References
 - [Code with Antonio](https://www.youtube.com/@codewithantonio): https://www.youtube.com/watch?v=0OaDyjB9Ib8
