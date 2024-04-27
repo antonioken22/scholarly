@@ -1,10 +1,12 @@
 "use client";
 
-import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
 import { MenuIcon } from "lucide-react";
 import { useParams } from "next/navigation";
+import { useMediaQuery } from "usehooks-ts";
+
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { Title } from "./title";
 import { Banner } from "./banner";
 import { Menu } from "./menu";
@@ -16,6 +18,7 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
+  const isMobile = useMediaQuery("(max-width:768px)");
   const params = useParams();
 
   const document = useQuery(api.documents.getById, {
@@ -55,7 +58,9 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
           </div>
         </div>
       </nav>
-      {document.isArchived && <Banner documentId={document._id} />}
+      {document.isArchived && ((isMobile && isCollapsed) || !isMobile) && (
+        <Banner documentId={document._id} />
+      )}
     </>
   );
 };
