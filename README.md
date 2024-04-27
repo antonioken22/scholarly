@@ -2,7 +2,10 @@
 https://scholarly-liart.vercel.app/
 
 ## Featured Student Tools
-- Notes
+- Note Taking
+- Note Publishing (View-Only)
+- Course Flowsheet [Under-development]
+- Faculty Profile Directory [Under-development]
 
 ## Services Used
 - User Authentication: [Clerk](https://clerk.com/)
