@@ -48,7 +48,7 @@ export const Title = ({ initialData }: TitleProps) => {
   };
 
   return (
-    <div className="flex items-center gap-x-1 max-w-[240px]">
+    <div className="flex items-center gap-x-1 w-[200px] md:w-[400px]">
       {!!initialData.icon && <p>{initialData.icon}</p>}
       {isEditing ? (
         <Input
