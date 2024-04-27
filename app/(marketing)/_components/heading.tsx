@@ -12,10 +12,11 @@ export const Heading = () => {
   return (
     <div className="max-w-3xl space-y-4 mt-40">
       <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
-        All you need to use are at <span className="underline">Scholarly</span>
+        All the tools you need are at{" "}
+        <span className="underline">Scholarly</span>
       </h1>
       <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-        Scholarly is the one-top shop of all <br /> student tools.
+        Note taking app, Course flowsheet, Faculty directory, etc.
       </h3>
       {isLoading && (
         <div className="w-full flex items-center justify-center">
