@@ -59,9 +59,11 @@ export const CoverImageModal = () => {
           <h2 className="text-center text-lg font-semibold">Cover Image</h2>
         </DialogHeader>
         <DialogDescription>
-          <h2 className="text-center text-md font-semibold">
-            For Mobile Users: Use images with [21:9] aspect ratio for optimal
-            view.
+          <h2 className="text-justified text-md font-semibold">
+            Mobile Users: Use images with [21:9] aspect ratio for optimal view.
+            Tablet Users: Use images with [24:9] aspect ratio for optimal view.
+            Desktop Users: Use images with [27:9] aspect ratio for optimal view.
+            XL Scrn Users: Use images with [30:9] aspect ratio for optimal view.
           </h2>
         </DialogDescription>
         <SingleImageDropzone

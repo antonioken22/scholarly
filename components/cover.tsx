@@ -39,7 +39,7 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   return (
     <div
       className={cn(
-        "relative aspect-[21/9] md:w-full md:h-[35vh] group",
+        "relative aspect-[21/9] md:aspect-[24/9] lg:aspect-[27/9] xl:aspect-[30/9] group",
         !url && "h-[12vh]",
         url && "bg-muted"
       )}
