@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import { useEdgeStore } from "@/lib/edgestore";
 import { Skeleton } from "./ui/skeleton";
+import { ConfirmModal } from "./modals/confirm-modal";
 
 interface CoverImageProps {
   url?: string;
@@ -55,15 +56,16 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
             <ImageIcon className="h-4 w-4 mr-2" />
             Change cover
           </Button>
-          <Button
-            onClick={onRemove}
-            className="text-muted-foreground text-xs"
-            variant="outline"
-            size="sm"
-          >
-            <X className="h-4 w-4 mr-2" />
-            Remove
-          </Button>
+          <ConfirmModal onConfirm={onRemove}>
+            <Button
+              className="text-muted-foreground text-xs"
+              variant="outline"
+              size="sm"
+            >
+              <X className="h-4 w-4 mr-2" />
+              Remove
+            </Button>
+          </ConfirmModal>
         </div>
       )}
     </div>
