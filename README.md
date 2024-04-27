@@ -16,6 +16,18 @@ https://scholarly-liart.vercel.app/
 - Text Editor: [Block Note](https://www.blocknotejs.org/)
 - Emoji Picker: [emoji-picker-react](https://www.npmjs.com/package/emoji-picker-react)
 
+## .env.local
+```env
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+EDGE_STORE_ACCESS_KEY=
+EDGE_STORE_SECRET_KEY=
+```
+
 ## Running Locally
 Terminal 1:
 ```shell
