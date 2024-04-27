@@ -3,7 +3,12 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { useCoverImage } from "@/hooks/use-cover-image";
 import { SingleImageDropzone } from "../single-image-dropzone";
 import { useEdgeStore } from "@/lib/edgestore";
@@ -53,6 +58,12 @@ export const CoverImageModal = () => {
         <DialogHeader>
           <h2 className="text-center text-lg font-semibold">Cover Image</h2>
         </DialogHeader>
+        <DialogDescription>
+          <h2 className="text-center text-md font-semibold">
+            For Mobile Users: Use images with [21:9] aspect ratio for optimal
+            view.
+          </h2>
+        </DialogDescription>
         <SingleImageDropzone
           className="w-full outline-none"
           disabled={isSubmitting}
