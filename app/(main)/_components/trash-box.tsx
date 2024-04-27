@@ -73,12 +73,12 @@ export const TrashBox = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="h-7 px-2 focus-visible:ring-transparent bg-secondary"
-          placeholder="Filter by page title..."
+          placeholder="Filter by note title..."
         />
       </div>
       <div className="mt-2 px-1 pb-1">
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
-          No document found.
+          No note found.
         </p>
         {filteredDocuments?.map((document) => (
           <div
