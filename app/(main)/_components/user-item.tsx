@@ -8,19 +8,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 
 export const UserItem = () => {
-  const router = useRouter();
-
-  const onReturnHome = () => {
-    router.push(`/`);
-  };
-
   const { user } = useUser();
   return (
     <div>
@@ -28,7 +20,7 @@ export const UserItem = () => {
         <DropdownMenuTrigger>
           <div
             role="button"
-            className="flex itesm-center text-sm p-3 w-full hover:bg-primary/5"
+            className="flex items-center text-sm p-3 w-full hover:bg-primary/5"
           >
             <div className="gap-x-2 flex items-center max-w-[150px]">
               <Avatar className="h-5 w-5">
@@ -52,7 +44,6 @@ export const UserItem = () => {
               <p className="text-xs font-medium leading-non text-muted-foreground">
                 {user?.emailAddresses[0].emailAddress}
               </p>
-              <Home className="h-4 w-4" role="button" onClick={onReturnHome} />
             </div>
             <div className="flex items-center gap-x-2">
               <div className="rounded-md bg-secondary p-1">

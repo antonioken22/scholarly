@@ -2,8 +2,8 @@
 
 import {
   ChevronsLeft,
+  Home,
   MenuIcon,
-  Plus,
   PlusCircle,
   Search,
   Settings,
@@ -58,6 +58,10 @@ export const Navigation = () => {
       collapse();
     }
   }, [pathname, isMobile]);
+
+  const onReturnHome = () => {
+    router.push(`/`);
+  };
 
   const handleMouseDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -137,7 +141,7 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[9999]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -154,13 +158,17 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          <Item label="Home" icon={Home} onClick={onReturnHome} />
           <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-          <Item onClick={handleCreate} label="New note" icon={PlusCircle} />
+          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+          {/*I think this is a bit redundant */}
+          {/* <Item onClick={handleCreate} label="New note" icon={PlusCircle} /> */}
         </div>
-        <div className="mt-4">
+        <div className="mt-2 ml-2">
+          <Item onClick={handleCreate} label="New note" icon={PlusCircle} />
           <DocumentList />
-          <Item onClick={handleCreate} label="New note" icon={Plus} />
+        </div>
+        <div>
           <Popover>
             <PopoverTrigger className="w-full mt-4">
               <Item label="Trash" icon={Trash} />
@@ -182,7 +190,7 @@ export const Navigation = () => {
       <div
         ref={navbarRef}
         className={cn(
-          "absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
+          "absolute top-0 z-[9999] left-60 w-[calc(100%-240px)]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "left-0 w-full"
         )}
