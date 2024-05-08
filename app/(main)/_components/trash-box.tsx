@@ -18,6 +18,9 @@ export const TrashBox = () => {
   const documents = useQuery(api.documents.getTrash);
   const restore = useMutation(api.documents.restore);
   const remove = useMutation(api.documents.remove);
+  const courseFlowsheets = useQuery(api.courseFlowsheets.getTrash);
+  const restoreCourseFlowsheet = useMutation(api.courseFlowsheets.restore);
+  const removeCourseFlowsheet = useMutation(api.courseFlowsheets.remove);
 
   const [search, setSearch] = useState("");
 
@@ -25,11 +28,23 @@ export const TrashBox = () => {
     return document.title.toLowerCase().includes(search.toLowerCase());
   });
 
-  const onClick = (documentId: string) => {
+  const filteredCourseFlowsheets = courseFlowsheets?.filter(
+    (courseFlowsheet) => {
+      return courseFlowsheet.program
+        .toLowerCase()
+        .includes(search.toLowerCase());
+    }
+  );
+
+  const onClickNote = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
 
-  const onRestore = (
+  const onClickCourseFlowsheet = (courseFlowsheetId: string) => {
+    router.push(`/course-flowsheets/${courseFlowsheetId}`);
+  };
+
+  const onRestoreNote = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     documentId: Id<"documents">
   ) => {
@@ -43,7 +58,21 @@ export const TrashBox = () => {
     });
   };
 
-  const onRemove = (documentId: Id<"documents">) => {
+  const onRestoreCourseFlowsheet = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    courseFlowsheetId: Id<"courseFlowsheets">
+  ) => {
+    event.stopPropagation();
+    const promise = restoreCourseFlowsheet({ id: courseFlowsheetId });
+
+    toast.promise(promise, {
+      loading: "Restoring course flowsheet",
+      success: "Course flowsheet restored.",
+      error: "Failed to restore course flowsheet.",
+    });
+  };
+
+  const onRemoveNote = (documentId: Id<"documents">) => {
     const promise = remove({ id: documentId });
 
     toast.promise(promise, {
@@ -57,7 +86,23 @@ export const TrashBox = () => {
     }
   };
 
-  if (documents === undefined) {
+  const onRemoveCourseFlowsheet = (
+    courseFlowsheetId: Id<"courseFlowsheets">
+  ) => {
+    const promise = removeCourseFlowsheet({ id: courseFlowsheetId });
+
+    toast.promise(promise, {
+      loading: "Deleting course flowsheet",
+      success: "Course flowsheet deleted.",
+      error: "Failed to delete course flowsheet.",
+    });
+
+    if (params.courseFlowsheetId === courseFlowsheetId) {
+      router.push("/course-flowsheets");
+    }
+  };
+
+  if (documents === undefined || courseFlowsheets === undefined) {
     return (
       <div className="h-full flex items-center justify-center p-4">
         <Spinner size="lg" />
@@ -73,30 +118,61 @@ export const TrashBox = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="h-7 px-2 focus-visible:ring-transparent bg-secondary"
-          placeholder="Filter by note title..."
+          placeholder="Filter by title..."
         />
       </div>
       <div className="mt-2 px-1 pb-1">
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
-          No note found.
+          Trash is empty.
         </p>
         {filteredDocuments?.map((document) => (
           <div
             key={document._id}
             role="button"
-            onClick={() => onClick(document._id)}
+            onClick={() => onClickNote(document._id)}
             className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
           >
             <span className="truncate pl-2">{document.title}</span>
             <div className="flex items-center">
               <div
-                onClick={(e) => onRestore(e, document._id)}
+                onClick={(e) => onRestoreNote(e, document._id)}
                 role="button"
                 className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </div>
-              <ConfirmModal onConfirm={() => onRemove(document._id)}>
+              <ConfirmModal onConfirm={() => onRemoveNote(document._id)}>
+                <div
+                  role="button"
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+                >
+                  <Trash className="h-4 w-4 text-muted-foreground" />
+                </div>
+              </ConfirmModal>
+            </div>
+          </div>
+        ))}
+        {filteredCourseFlowsheets?.map((courseFlowsheet) => (
+          <div
+            key={courseFlowsheet._id}
+            role="button"
+            onClick={() => onClickCourseFlowsheet(courseFlowsheet._id)}
+            className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
+          >
+            <span className="truncate pl-2">{courseFlowsheet.program}</span>
+            <div className="flex items-center">
+              <div
+                onClick={(e) =>
+                  onRestoreCourseFlowsheet(e, courseFlowsheet._id)
+                }
+                role="button"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+              >
+                <Undo className="h-4 w-4 text-muted-foreground" />
+              </div>
+              <ConfirmModal
+                onConfirm={() => onRemoveCourseFlowsheet(courseFlowsheet._id)}
+              >
                 <div
                   role="button"
                   className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
