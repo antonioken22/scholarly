@@ -28,7 +28,9 @@ export const FeatureUnderDevelopment = ({
         alt="Error"
         className="hidden dark:block"
       />
-      <h2>Feature is still under-development. Sorry for the inconvenience</h2>
+      <h2 className="break-words pl-3">
+        Feature is still under-development. Sorry for the inconvenience
+      </h2>
       <Button asChild>
         <Link href={returnLink}>Go back</Link>
       </Button>
