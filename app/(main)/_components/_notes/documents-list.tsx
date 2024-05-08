@@ -3,7 +3,7 @@
 import { useQuery } from "convex/react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { FileIcon } from "lucide-react";
+import { NotebookText } from "lucide-react";
 
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
@@ -73,7 +73,7 @@ export const DocumentList = ({
             id={document._id}
             onClick={() => onRedirect(document._id)}
             label={document.title}
-            icon={FileIcon}
+            icon={NotebookText}
             documentIcon={document.icon}
             active={params.documentId === document._id}
             level={level}
