@@ -4,9 +4,11 @@ import {
   ChevronsLeft,
   Home,
   MenuIcon,
+  Notebook,
   PlusCircle,
   Search,
   Settings,
+  Sheet,
   Trash,
 } from "lucide-react";
 import { ElementRef, useEffect, useRef, useState } from "react";
@@ -25,10 +27,11 @@ import {
 } from "@/components/ui/popover";
 import { useSearch } from "@/hooks/use-search";
 import { useSettings } from "@/hooks/use-settings";
-import { Item } from "./item";
-import { DocumentList } from "./document-list";
+import { Item } from "./_notes/item";
+import { DocumentList } from "./_notes/documents-list";
 import { TrashBox } from "./trash-box";
-import { Navbar } from "./navbar";
+import { Navbar } from "./_notes/navbar";
+import { FlowsheetList } from "./_courseFlowsheets/flowsheet-list";
 
 export const Navigation = () => {
   const router = useRouter();
@@ -37,7 +40,9 @@ export const Navigation = () => {
   const params = useParams();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width:768px)");
-  const create = useMutation(api.documents.create);
+
+  const createNote = useMutation(api.documents.create);
+  const createCourseFlowsheet = useMutation(api.courseFlowsheets.create);
 
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -59,8 +64,16 @@ export const Navigation = () => {
     }
   }, [pathname, isMobile]);
 
-  const onReturnHome = () => {
+  const returnHome = () => {
     router.push(`/`);
+  };
+
+  const returnDocuments = () => {
+    router.push(`/documents`);
+  };
+
+  const returnCourseFlowsheets = () => {
+    router.push(`/course-flowsheets`);
   };
 
   const handleMouseDown = (
@@ -124,8 +137,8 @@ export const Navigation = () => {
     }
   };
 
-  const handleCreate = () => {
-    const promise = create({ title: "Untitled" }).then((documentId) =>
+  const handleCreateNote = () => {
+    const promise = createNote({ title: "Untitled" }).then((documentId) =>
       router.push(`/documents/${documentId}`)
     );
 
@@ -133,6 +146,19 @@ export const Navigation = () => {
       loading: "Creating a new note...",
       success: "New note created.",
       error: "Failed to create a new note.",
+    });
+  };
+
+  const handleCreateCourseFlowsheet = () => {
+    const promise = createCourseFlowsheet({ title: "Program" }).then(
+      (courseflowsheetId) =>
+        router.push(`/course-flowsheets/${courseflowsheetId}`)
+    );
+
+    toast.promise(promise, {
+      loading: "Creating a course flowsheet...",
+      success: "New course flowsheet created.",
+      error: "Failed to create a new course flowsheet.",
     });
   };
 
@@ -158,15 +184,37 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Home" icon={Home} onClick={onReturnHome} />
+          <Item label="Home" icon={Home} onClick={returnHome} />
           <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
           <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
           {/*I think this is a bit redundant */}
           {/* <Item onClick={handleCreate} label="New note" icon={PlusCircle} /> */}
         </div>
-        <div className="mt-2 ml-2">
-          <Item onClick={handleCreate} label="New note" icon={PlusCircle} />
-          <DocumentList />
+        <div className="mt-2">
+          <Item onClick={returnDocuments} label="Notes" icon={Notebook} />
+          <div className="ml-2">
+            <Item
+              onClick={handleCreateNote}
+              label="New note"
+              icon={PlusCircle}
+            />
+            <DocumentList />
+          </div>
+        </div>
+        <div className="mt-2">
+          <Item
+            onClick={returnCourseFlowsheets}
+            label="CourseFlowsheet"
+            icon={Sheet}
+          />
+          <div className="ml-2">
+            <Item
+              onClick={handleCreateCourseFlowsheet}
+              label="New course flowsheet"
+              icon={PlusCircle}
+            />
+            <FlowsheetList />
+          </div>
         </div>
         <div>
           <Popover>

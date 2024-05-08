@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as courseFlowsheets from "../courseFlowsheets.js";
 import type * as documents from "../documents.js";
 
 /**
@@ -25,6 +26,7 @@ import type * as documents from "../documents.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  courseFlowsheets: typeof courseFlowsheets;
   documents: typeof documents;
 }>;
 export declare const api: FilterApi<
